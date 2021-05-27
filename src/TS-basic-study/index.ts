@@ -410,102 +410,457 @@
 //   console.log(calculateTotalPrice(products, 'Радар'));
 //   console.log(calculateTotalPrice(products, 'Дроид'));
 
-// 07 -- IS NOT READY
-enum Transaction {
-    DEPOSIT = 'deposit', 
-    WITHDRAW = 'withdraw', 
-  };
+// // 07 -- IS NOT READY
+// enum Transaction {
+//     DEPOSIT = 'deposit', 
+//     WITHDRAW = 'withdraw', 
+//   };
 
-type Amount = number;
-type Type = string;
-interface ITransaction {
-    id: string,
-    type: string,
-    amount: number
-}
+// type Amount = number;
+// type Type = string;
+// interface ITransaction {
+//     id: string,
+//     type: string,
+//     amount: number
+// }
 
-interface IAccount {
-    balance: number,
-    transactions: [],
-    createTransaction: (a: Amount, t: Type) => ITransaction,
-    deposit: (a: Amount) => void,
-    withdraw: (a: Amount) => void,
-    getBalance: () => void,
-    getTransactionDetails: (id: Type) => void,
-    getTransactionTotal(id: Type): void,
-}
-  const account: IAccount = {
-   balance: 0,
-    transactions: [],
-    createTransaction(amount , type ) {
-      const transaction = {
-        id: `id-${this.transactions.length + 1}`,
-        type,
-        amount,
-      };
-      return transaction;
-    },
-    deposit(amount) {
-      this.balance += amount;
+// interface IAccount {
+//     balance: number,
+//     transactions: [],
+//     createTransaction: (a: Amount, t: Type) => ITransaction,
+//     deposit: (a: Amount) => void,
+//     withdraw: (a: Amount) => void,
+//     getBalance: () => void,
+//     getTransactionDetails: (id: Type) => void,
+//     getTransactionTotal(id: Type): void,
+// }
+//   const account: IAccount = {
+//    balance: 0,
+//     transactions: [],
+//     createTransaction(amount , type ) {
+//       const transaction = {
+//         id: `id-${this.transactions.length + 1}`,
+//         type,
+//         amount,
+//       };
+//       return transaction;
+//     },
+//     deposit(amount) {
+//       this.balance += amount;
       
-      const newDepositTransaction = this.createTransaction(
-          amount,
-          Transaction.DEPOSIT,
-      );
-    //   this.transactions = [...this.transactions, newDepositTransaction];
-    },
-    withdraw(amount: Amount) {
-      if (amount > this.balance) {
-        console.log(
-          `You try to withdraw ${amount} but for this transaction not enough money in your account!`,
-        );
-      } else {
-        this.balance -= amount;
-        const newWithdrawTransaction = this.createTransaction(
-          amount,
-          Transaction.WITHDRAW,
-        );
-        // this.transactions = [...this.transactions, newWithdrawTransaction];
-      }
-    },
-    getBalance() {
-      console.log('Balance: ', this.balance);
-      return this.balance;
-    },
-    getTransactionDetails(id) {
-      for (const transaction of this.transactions) {
-        if (transaction.id === id) {
-          console.log(`You found transaction by id '${id}': `, transaction);
-          return transaction;
-        }
-      }
-    },
-    getTransactionTotal(type) {
-      let total = 0;
-      for (const transaction of this.transactions) {
-        if (transaction.type === type) {
-          total = total + transaction.amount;
-        }
-      }
-      return console.log(`The amount of "${type}" transactions is: ${total}`);
-    },
-  };
+//       const newDepositTransaction = this.createTransaction(
+//           amount,
+//           Transaction.DEPOSIT,
+//       );
+//     //   this.transactions = [...this.transactions, newDepositTransaction];
+//     },
+//     withdraw(amount: Amount) {
+//       if (amount > this.balance) {
+//         console.log(
+//           `You try to withdraw ${amount} but for this transaction not enough money in your account!`,
+//         );
+//       } else {
+//         this.balance -= amount;
+//         const newWithdrawTransaction = this.createTransaction(
+//           amount,
+//           Transaction.WITHDRAW,
+//         );
+//         // this.transactions = [...this.transactions, newWithdrawTransaction];
+//       }
+//     },
+//     getBalance() {
+//       console.log('Balance: ', this.balance);
+//       return this.balance;
+//     },
+//     getTransactionDetails(id) {
+//       for (const transaction of this.transactions) {
+//         if (transaction.id === id) {
+//           console.log(`You found transaction by id '${id}': `, transaction);
+//           return transaction;
+//         }
+//       }
+//     },
+//     getTransactionTotal(type) {
+//       let total = 0;
+//       for (const transaction of this.transactions) {
+//         if (transaction.type === type) {
+//           total = total + transaction.amount;
+//         }
+//       }
+//       return console.log(`The amount of "${type}" transactions is: ${total}`);
+//     },
+//   };
   
-  account.deposit(150);
-  account.getBalance();
-  console.table(account.transactions);
-  account.deposit(100);
-  account.getBalance();
-  console.table(account.transactions);
-  account.withdraw(50);
-  account.getBalance();
-  console.table(account.transactions);
-  account.withdraw(350);
-  account.getBalance();
-  console.table(account.transactions);
-  account.getTransactionDetails('id-2');
-  account.getTransactionTotal('deposit');
-  account.getTransactionTotal('withdraw');
+//   account.deposit(150);
+//   account.getBalance();
+//   console.table(account.transactions);
+//   account.deposit(100);
+//   account.getBalance();
+//   console.table(account.transactions);
+//   account.withdraw(50);
+//   account.getBalance();
+//   console.table(account.transactions);
+//   account.withdraw(350);
+//   account.getBalance();
+//   console.table(account.transactions);
+//   account.getTransactionDetails('id-2');
+//   account.getTransactionTotal('deposit');
+//   account.getTransactionTotal('withdraw');
 
 
+// // 01
+// interface IAccount {
+//   owner: string,
+//   balance: number,
+//   discount: number,
+//   orders: string[],
+//   changeDiscount: (value: number) => void,
+//   showOrders: (value?: number) => void,
+//   addOrder: (cost: number, order: string) => void
+// }
+// const account: IAccount = {
+//   owner: "Mango",
+//   balance: 24000,
+//   discount: 0.1,
+//   orders: ["order-1", "order-2", "order-3"],
+//   changeDiscount(value) {
+//     this.discount = value;
+//   },
+//   showOrders() {
+//     return this.orders;
+//   },
+//   addOrder(cost, order) {
+//     this.balance -= cost;
+//     this.orders.push(order);
+//   }
+// };
+// account.changeDiscount(0.15);
+// console.log(account.discount); // 0.15
+// console.table(account.showOrders()); // ['order-1', 'order-2', 'order-3']
+// account.addOrder(5000, "order-4");
+// console.log(account.balance); // 19000
+
+// // 02
+// interface Params {
+//   login: string,
+//   email: string
+// }
+// class Account {
+//   public login: string;
+//   public email: string;
+//   constructor({ login, email }: Params) {
+//     this.login = login;
+//     this.email = email;
+//   }
+//   getInfo() {
+//     console.log(`Login: ${this.login}, Email: ${this.email}`);
+//   }
+// }
+// const mango = new Account({
+//   login: "Mangozedog",
+//   email: "mango@dog.woof"
+// });
+// mango.getInfo();
+// const poly = new Account({
+//   login: "Poly",
+//   email: "poly@mail.com"
+// });
+// poly.getInfo();
+
+// // 03
+// interface Params {
+//   name: string, age: number, followers: number
+// }
+// interface IUser {
+//   getInfo: () => void
+// }
+// class User implements IUser {
+//   private name: string; 
+//   private age: number; 
+//   private followers: number;
+
+//   constructor({ name, age, followers }: Params) {
+//     this.name = name;
+//     this.age = age;
+//     this.followers = followers;
+//   }
+//   public getInfo() {
+//     return console.log(
+//       `User ${this.name} is ${this.age} years old and has ${this.followers} followers`
+//     );
+//   };
+// }
+// const mango = new User({
+//   name: "Mango",
+//   age: 2,
+//   followers: 20
+// });
+// mango.getInfo(); 
+// const poly = new User({
+//   name: "Poly",
+//   age: 3,
+//   followers: 17
+// });
+// poly.getInfo();
+
+// // 04
+// interface IStorage {
+//   items: string[],
+//   getItems: () => void,
+//   addItem: (item: string) => void,
+//   removeItem: (item: string) => void
+// }
+// class Storage implements IStorage {
+//   public items: string[];
+//   constructor(items: string[]) {
+//     this.items = items;
+//   }
+//   public getItems() {
+//     return this.items;
+//   }
+//   public addItem(item: string) {
+//      this.items.push(item);
+//   }
+//   public removeItem(item: string) {
+//     if (this.items.includes(item)) {
+//        this.items.splice(this.items.indexOf(item), 1);
+//     } else {
+//       console.log("We don't find this item! Please, try again!!!");
+//     }
+//   }
+// }
+// const shop = new Storage([
+//   "Нанитоиды",
+//   "Пролонгер",
+//   "Железные жупи",
+//   "Антигравитатор"
+// ]);
+// const items = shop.getItems();
+// console.table(items); // [ "Нанитоиды", "Пролонгер", "Железные жупи", "Антигравитатор" ]
+// shop.addItem("Дроид");
+// console.table(shop.items); // [ "Нанитоиды", "Пролонгер", "Железные жупи", "Антигравитатор", "Дроид" ]
+
+// shop.removeItem("Пролонгер");
+// console.table(shop.items); // [ "Нанитоиды", "Железные жупи", "Антигравитатор", "Дроид" ]
+
+// // 05
+// interface IStringBuilder {
+//   value: string,
+//   append: (value: string) => void,
+//   prepend: (value: string) => void,
+//   pad: (value: string) => void,
+  
+// }
+// class StringBuilder implements IStringBuilder {
+//   public _value: string;
+//   constructor(value: string) {
+//     this._value = value;
+//   }
+//   get value() {
+//     return this._value;
+//   }
+//   append(str: string) {
+//     return (this._value += str);
+//   }
+//   prepend(str: string) {
+//     return (this._value = str + this._value);
+//   }
+//   pad(str: string) {
+//     return (this._value = str + this._value + str);
+//   }
+// }
+// const builder = new StringBuilder(".");
+// builder.append("^");
+// console.log(builder.value); 
+// builder.prepend("^");
+// console.log(builder.value); 
+// builder.pad("=");
+// console.log(builder.value);
+
+// // 06
+// interface Params {
+//   speed: number, 
+//   price: number, 
+//   maxSpeed: number, 
+//   isOn: boolean, 
+//   distance: number,
+// }
+// interface ICar {
+//   speed: number;
+//   _price: number; 
+//   maxSpeed: number;
+//   isOn: boolean;
+//   distance: number;
+//   getSpecs?: (car: Params) => void,
+//   turnOn: () => void,
+//   turnOff: () => void,
+//   accelerate: (value: number) => void,
+//   decelerate: (value: number) => void,
+//   drive: (hours: number) => void,
+// }
+// class Car implements ICar {
+//   speed: number;
+//   _price: number; 
+//   maxSpeed: number;
+//   isOn: boolean;
+//   distance: number;
+//   constructor({ speed, price, maxSpeed, isOn, distance }: Params) {
+//     this.speed = speed;
+//     this._price = price;
+//     this.maxSpeed = maxSpeed;
+//     this.isOn = isOn;
+//     this.distance = distance;
+//   }
+//   static getSpecs(car: Params) {
+//     console.log(
+//       `maxSpeed: ${car.maxSpeed}, speed: ${car.speed}, isOn: ${car.isOn}, distance: ${car.distance}, price: ${car.price}`
+//     );
+//   }
+//   get price() {
+//     return this._price;
+//   }
+//   set price(price) {
+//     this._price = price;
+//   }
+//   turnOn() {
+//     return (this.isOn = true);
+//   }
+//   turnOff() {
+//     this.isOn = false;
+//     this.speed = 0;
+//     return;
+//   }
+//   accelerate(value: number) {
+//     if (value <= this.maxSpeed) {
+//       this.speed = value;
+//     }
+//     return;
+//   }
+//   decelerate(value: number) {
+//     if (value > 0) {
+//       this.speed = this.speed - value;
+//     }
+//   }
+//   drive(hours: number) {
+//     if (this.isOn === true) {
+//       this.distance += hours * this.speed;
+//     }
+//     return;
+//   }
+// }
+// const mustang = new Car({ maxSpeed: 200, price: 2000, speed: 0, isOn: false, distance: 0 });
+// mustang.turnOn();
+// mustang.accelerate(50);
+// mustang.drive(2);
+// Car.getSpecs(mustang);
+// mustang.decelerate(20);
+// mustang.drive(1);
+// mustang.turnOff();
+// Car.getSpecs(mustang);
+// console.log(mustang.price); 
+// mustang.price = 4000;
+// console.log(mustang.price); 
+
+// // 07
+import users from './users';
+interface IUsers {
+  id: string,
+  name: string,
+  email: string,
+  eyeColor: string,
+  friends: string[],
+  isActive: boolean,
+  balance: number,
+  skills: string[],
+  gender: string,
+  age: number
+}
+// 07-01
+const getUserNames = (users: IUsers[]) => {
+  return users.map(user => user.name);
+};
+console.log(getUserNames(users));
+
+// // 07-02
+const getUsersWithEyeColor = (users: IUsers[], color: string) => {
+  return users.filter(user => user.eyeColor === color);
+};
+console.log(getUsersWithEyeColor(users, "blue"));
+
+// 07-03
+const getUsersWithGender = (users: IUsers[], gender: string) => {
+  const usersWithGender = users.filter(user => {
+    return user.gender === gender;
+  });
+  return usersWithGender.map(user => {
+    return user.name;
+  });
+};
+console.log(getUsersWithGender(users, "male"));
+
+// 07-04
+const getInactiveUsers = (users: IUsers[]) => {
+  return users.filter(user => user.isActive !== true);
+};
+console.log(getInactiveUsers(users));
+
+// 07-05
+const getUserWithEmail = (users: IUsers[], email: string) => {
+  const userEmail = users.find(user => {
+    return user.email === email;
+  });
+  return userEmail;
+};
+console.log(getUserWithEmail(users, "shereeanthony@kog.com"));
+console.log(getUserWithEmail(users, "elmahead@omatom.com"));
+
+// 07-06
+const getUsersWithAge = (users: IUsers[], min: number, max: number) => {
+  const usersWithAge = users.filter(user => {
+    return user.age > min && user.age < max;
+  });
+  return usersWithAge;
+};
+console.log(getUsersWithAge(users, 20, 30));
+console.log(getUsersWithAge(users, 30, 40));
+
+// 07-07
+const calculateTotalBalance = (users: IUsers[]) => {
+  return users.reduce((acc, user) => acc + user.balance, 0);
+};
+console.log(calculateTotalBalance(users));
+
+// 07-08
+const getUsersWithFriend = (users: IUsers[], friendName: string) => {
+  const usersWithFriend = users.filter(user =>
+    user.friends.find(friend => {
+      return friend === friendName;
+    })
+  );
+  return usersWithFriend.map(user => user.name);
+};
+console.log(getUsersWithFriend(users, "Briana Decker")); 
+console.log(getUsersWithFriend(users, "Goldie Gentry")); 
+
+// 07-09
+const getNamesSortedByFriendsCount = (users: IUsers[]) => {
+  const namesSortedByFriends = users.sort((prevUser, nextUser) => {
+    return prevUser.friends.length - nextUser.friends.length;
+  });
+  return namesSortedByFriends.map(user => user.name);
+};
+console.log(getNamesSortedByFriendsCount(users));
+
+// 07-10
+const getSortedUniqueSkills = (users: IUsers[]) => {
+  const sortedUniqueSkills = users.reduce((allSkills: any[], user) => {
+    allSkills.push(...user.skills);
+    return allSkills.reduce(
+      (unigue, skill) => (unigue.includes(skill) ? unigue : [...unigue, skill]),
+      []
+    );
+  }, []);
+  return sortedUniqueSkills.sort();
+};
+console.log(getSortedUniqueSkills(users));
 export {};
