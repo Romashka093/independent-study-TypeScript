@@ -1,3 +1,4 @@
+// import users from './users';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // // primitives
 // // 01
@@ -42,14 +43,16 @@
 
 // // 03
 // const ADMIN_PASSWORD: string = 'jqueryismyjam';
-// let message2: any;
+// let message2: string;
 // const inputValue: string | null = prompt('Enter admin password: ');
 // if (inputValue === null) {
-//   message2 = alert('Отменено пользователем!');
+//   message2 = 'Отменено пользователем!';
+//   alert(message2)
 // } else {
 //   inputValue === ADMIN_PASSWORD
-//     ? (message2 = alert('Добро пожаловать!'))
-//     : (message2 = alert('Доступ запрещен, неверный пароль!'));
+//     ? (message2 = ('Добро пожаловать!'))
+//     : (message2 = ('Доступ запрещен, неверный пароль!'));
+//     alert(message2)
 // }
 
 // // 04
@@ -370,25 +373,35 @@
 //     }),
 //   ); // 400
 
-//   // 05 
-//   const products = [
-//      { name: 'Радар', price: 1300, quantity: 4 },
-//    { name: 'Сканер', price: 2700, quantity: 3 },
-//     { name: 'Дроид', price: 400, quantity: 7 },
-//     { name: 'Захват', price: 1200, quantity: 2 },
-//   ];
-//   const getAllPropValues = (array: any[], prop: string) => {
-//     const values = [];
-//     for (const product of array) {
-//       if (prop in product) {
-//         values.push(product[prop]);
-//       }
-//     }
-//     return values;
-//   };
-// console.log(getAllPropValues(products, 'name')); // ['Радар', 'Сканер', 'Дроид', 'Захват']
-// console.log(getAllPropValues(products, 'quantity')); // [4, 3, 7, 2]
-// console.log(getAllPropValues(products, 'category')); // []
+// 05 
+interface IPdoduct {
+    [key: string]: string | number;
+    productName: string;
+    price: number;
+    quantity: number;
+  }
+type TValues = number | string;
+  const products: IPdoduct[] = [
+    { productName: 'Радар', price: 1300, quantity: 4 },
+    { productName: 'Сканер', price: 2700, quantity: 3 },
+    { productName: 'Дроид', price: 400, quantity: 7 },
+    { productName: 'Захват', price: 1200, quantity: 2 },
+  ];
+
+    const getAllPropValues = (array: IPdoduct[], prop: string) => {
+    let values: TValues[] = [];
+    for (let product of array) {
+      for (let entrie in product) {
+        if (prop === entrie) {
+          values.push(product[prop])
+        }
+      }
+    }
+    return values;
+  };
+console.log(getAllPropValues(products, 'productName')); // ['Радар', 'Сканер', 'Дроид', 'Захват']
+console.log(getAllPropValues(products, 'quantity')); // [4, 3, 7, 2]
+console.log(getAllPropValues(products, 'category')); // []
   
 // // 06 
 // const products = [
@@ -412,7 +425,7 @@
 
 // // 07 -- IS NOT READY
 // enum Transaction {
-//     DEPOSIT = 'deposit', 
+//     DEPOSIT = 'deposi  t', 
 //     WITHDRAW = 'withdraw', 
 //   };
 
@@ -761,8 +774,7 @@
 // mustang.price = 4000;
 // console.log(mustang.price); 
 
-// // 07
-import users from './users';
+// 07
 interface IUsers {
   id: string,
   name: string,
@@ -775,92 +787,92 @@ interface IUsers {
   gender: string,
   age: number
 }
-// 07-01
-const getUserNames = (users: IUsers[]) => {
-  return users.map(user => user.name);
-};
-console.log(getUserNames(users));
+// // 07-01
+// const getUserNames = (users: IUsers[]) => {
+//   return users.map(user => user.name);
+// };
+// console.log(getUserNames(users));
 
-// // 07-02
-const getUsersWithEyeColor = (users: IUsers[], color: string) => {
-  return users.filter(user => user.eyeColor === color);
-};
-console.log(getUsersWithEyeColor(users, "blue"));
+// // // 07-02
+// const getUsersWithEyeColor = (users: IUsers[], color: string) => {
+//   return users.filter(user => user.eyeColor === color);
+// };
+// console.log(getUsersWithEyeColor(users, "blue"));
 
-// 07-03
-const getUsersWithGender = (users: IUsers[], gender: string) => {
-  const usersWithGender = users.filter(user => {
-    return user.gender === gender;
-  });
-  return usersWithGender.map(user => {
-    return user.name;
-  });
-};
-console.log(getUsersWithGender(users, "male"));
+// // 07-03
+// const getUsersWithGender = (users: IUsers[], gender: string) => {
+//   const usersWithGender = users.filter(user => {
+//     return user.gender === gender;
+//   });
+//   return usersWithGender.map(user => {
+//     return user.name;
+//   });
+// };
+// console.log(getUsersWithGender(users, "male"));
 
-// 07-04
-const getInactiveUsers = (users: IUsers[]) => {
-  return users.filter(user => user.isActive !== true);
-};
-console.log(getInactiveUsers(users));
+// // 07-04
+// const getInactiveUsers = (users: IUsers[]) => {
+//   return users.filter(user => user.isActive !== true);
+// };
+// console.log(getInactiveUsers(users));
 
-// 07-05
-const getUserWithEmail = (users: IUsers[], email: string) => {
-  const userEmail = users.find(user => {
-    return user.email === email;
-  });
-  return userEmail;
-};
-console.log(getUserWithEmail(users, "shereeanthony@kog.com"));
-console.log(getUserWithEmail(users, "elmahead@omatom.com"));
+// // 07-05
+// const getUserWithEmail = (users: IUsers[], email: string) => {
+//   const userEmail = users.find(user => {
+//     return user.email === email;
+//   });
+//   return userEmail;
+// };
+// console.log(getUserWithEmail(users, "shereeanthony@kog.com"));
+// console.log(getUserWithEmail(users, "elmahead@omatom.com"));
 
-// 07-06
-const getUsersWithAge = (users: IUsers[], min: number, max: number) => {
-  const usersWithAge = users.filter(user => {
-    return user.age > min && user.age < max;
-  });
-  return usersWithAge;
-};
-console.log(getUsersWithAge(users, 20, 30));
-console.log(getUsersWithAge(users, 30, 40));
+// // 07-06
+// const getUsersWithAge = (users: IUsers[], min: number, max: number) => {
+//   const usersWithAge = users.filter(user => {
+//     return user.age > min && user.age < max;
+//   });
+//   return usersWithAge;
+// };
+// console.log(getUsersWithAge(users, 20, 30));
+// console.log(getUsersWithAge(users, 30, 40));
 
-// 07-07
-const calculateTotalBalance = (users: IUsers[]) => {
-  return users.reduce((acc, user) => acc + user.balance, 0);
-};
-console.log(calculateTotalBalance(users));
+// // 07-07
+// const calculateTotalBalance = (users: IUsers[]) => {
+//   return users.reduce((acc, user) => acc + user.balance, 0);
+// };
+// console.log(calculateTotalBalance(users));
 
-// 07-08
-const getUsersWithFriend = (users: IUsers[], friendName: string) => {
-  const usersWithFriend = users.filter(user =>
-    user.friends.find(friend => {
-      return friend === friendName;
-    })
-  );
-  return usersWithFriend.map(user => user.name);
-};
-console.log(getUsersWithFriend(users, "Briana Decker")); 
-console.log(getUsersWithFriend(users, "Goldie Gentry")); 
+// // 07-08
+// const getUsersWithFriend = (users: IUsers[], friendName: string) => {
+//   const usersWithFriend = users.filter(user =>
+//     user.friends.find(friend => {
+//       return friend === friendName;
+//     })
+//   );
+//   return usersWithFriend.map(user => user.name);
+// };
+// console.log(getUsersWithFriend(users, "Briana Decker")); 
+// console.log(getUsersWithFriend(users, "Goldie Gentry")); 
 
-// 07-09
-const getNamesSortedByFriendsCount = (users: IUsers[]) => {
-  const namesSortedByFriends = users.sort((prevUser, nextUser) => {
-    return prevUser.friends.length - nextUser.friends.length;
-  });
-  return namesSortedByFriends.map(user => user.name);
-};
-console.log(getNamesSortedByFriendsCount(users));
+// // 07-09
+// const getNamesSortedByFriendsCount = (users: IUsers[]) => {
+//   const namesSortedByFriends = users.sort((prevUser, nextUser) => {
+//     return prevUser.friends.length - nextUser.friends.length;
+//   });
+//   return namesSortedByFriends.map(user => user.name);
+// };
+// console.log(getNamesSortedByFriendsCount(users));
 
-// 07-10
-const getSortedUniqueSkills = (users: IUsers[]) => {
-  const sortedUniqueSkills = users.reduce((allSkills: any[], user) => {
-    allSkills.push(...user.skills);
-    return allSkills.reduce(
-      (unigue, skill) => (unigue.includes(skill) ? unigue : [...unigue, skill]),
-      []
-    );
-  }, []);
-  return sortedUniqueSkills.sort();
-};
-console.log(getSortedUniqueSkills(users));
+// // 07-10
+// const getSortedUniqueSkills = (users: IUsers[]) => {
+//   const sortedUniqueSkills = users.reduce((allSkills: any[], user) => {
+//     allSkills.push(...user.skills);
+//     return allSkills.reduce(
+//       (unigue, skill) => (unigue.includes(skill) ? unigue : [...unigue, skill]),
+//       []
+//     );
+//   }, []);
+//   return sortedUniqueSkills.sort();
+// };
+// console.log(getSortedUniqueSkills(users));
 export {};
